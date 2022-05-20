@@ -4,7 +4,7 @@ interface Telephone  {
     function changeOwner(address _owner) external;
 }
 
-contract Solver {
+contract TelephoneSolver {
     Telephone challenge;
 
     constructor(address addr) {

@@ -6,7 +6,7 @@ interface CoinFlip {
     function flip(bool _guess) external returns (bool);
 }
 
-contract Solver {
+contract CoinFlipSolver {
     using SafeMath for uint256;
     CoinFlip public challenge;
     uint256 lastHash;

