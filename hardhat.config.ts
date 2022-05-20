@@ -8,6 +8,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import { Wallet } from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { ethernaut_abi } from "./scripts/ethernaut_abi";
 
 dotenv.config();
 
@@ -42,11 +43,10 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 task("submit", "Submits a challenge Instance", async (taskArgs: any, hre: HardhatRuntimeEnvironment) => {
-  const ethernaut = await hre.ethers.getContractFactory("Ethernaut");
-  const instance = ethernaut.attach(ETHERNAUT_ADDRESS);
+  const ethernaut = await hre.ethers.getContractAt(ethernaut_abi, ETHERNAUT_ADDRESS);
   
   try {
-    const submitTx = await instance.submitLevelInstance(taskArgs.address);
+    const submitTx = await ethernaut.submitLevelInstance(taskArgs.address);
     const receipt = await submitTx.wait()
     console.log(receipt);
   } catch (e) {
