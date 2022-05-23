@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { BigNumber, Contract, ContractFactory, providers, Signer } from "ethers";
 import { ethers } from "hardhat";
-import { solveChallenge } from "../scripts/ethernaut";
 
 describe("Token", function () {
     let signer: Signer;
@@ -28,8 +27,5 @@ describe("Token", function () {
         expect(newTokenCount.toString()).not.to.equal(tokenCount.toString());
     });
 
-    // after(async () => {
-    //     const solved = await solveChallenge(challenge.address);
-    //     expect(solved).to.equal(true);
-    // })
+
 });

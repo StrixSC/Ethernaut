@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { BigNumber, Contract, ContractFactory, providers, Signer } from "ethers";
 import { ethers } from "hardhat";
-import { solveChallenge } from "../scripts/ethernaut";
 
 describe("Delegation", function () {
     let signer: Signer;
@@ -32,9 +31,4 @@ describe("Delegation", function () {
         const owner = await challenge.owner();
         expect(owner).to.equal(myAddress);
     });
-
-    // after(async () => {
-    //     const solved = await solveChallenge(challenge.address);
-    //     expect(solved).to.equal(true);
-    // })
 });

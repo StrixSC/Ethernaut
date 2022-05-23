@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { BigNumber, Contract, ContractFactory, providers, Signer } from "ethers";
 import { ethers } from "hardhat";
-import { solveChallenge } from "../scripts/ethernaut";
 
 describe("Vault", function () {
     let signer: Signer;
@@ -34,8 +33,5 @@ describe("Vault", function () {
         expect(isUnlocked).to.equal(false);
     });
 
-    // after(async () => {
-    //     const solved = await solveChallenge(challenge.address);
-    //     expect(solved).to.equal(true);
-    // })
+
 });
