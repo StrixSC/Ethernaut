@@ -12,10 +12,10 @@ import { ethernaut_abi } from "./scripts/ethernaut_abi";
 
 dotenv.config();
 
-const { RINKEBY_URL, MNEMONIC } = process.env;
+const { RINKEBY_URL, RINKEBY_URL_INFURA, MNEMONIC } = process.env;
 
 let signer: Wallet;
-const ETHERNAUT_ADDRESS = "0xD991431D8b033ddCb84dAD257f4821E9d5b38C33";
+const eth_addr = "0xD991431D8b033ddCb84dAD257f4821E9d5b38C33";
 
 const setupAccounts = () => {
   if (!MNEMONIC) {
@@ -31,7 +31,6 @@ const setupAccounts = () => {
   return signer;
 }
 
-
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -43,7 +42,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 
 task("submit", "Submits a challenge Instance", async (taskArgs: any, hre: HardhatRuntimeEnvironment) => {
-  const ethernaut = await hre.ethers.getContractAt(ethernaut_abi, ETHERNAUT_ADDRESS);
+  const ethernaut = await hre.ethers.getContractAt(ethernaut_abi, eth_addr);
   
   try {
     const submitTx = await ethernaut.submitLevelInstance(taskArgs.address);
@@ -74,7 +73,7 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     rinkeby: {
-      url: process.env.RINKEBY_URL || "",
+      url: RINKEBY_URL_INFURA || "",
       accounts: [setupAccounts()!.privateKey]
     }
   },
@@ -85,6 +84,9 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
+  mocha: {
+    timeout: 4000000
+  }
 };
 
 export default config;

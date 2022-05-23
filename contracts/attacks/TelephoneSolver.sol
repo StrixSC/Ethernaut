@@ -1,14 +1,14 @@
 pragma solidity ^0.8.0;
 
-interface Telephone  {
+interface ITelephone  {
     function changeOwner(address _owner) external;
 }
 
 contract TelephoneSolver {
-    Telephone challenge;
+    ITelephone challenge;
 
     constructor(address addr) {
-        challenge = Telephone(addr);
+        challenge = ITelephone(addr);
     }
 
     function solve() external payable {
