@@ -54,6 +54,13 @@ task("submit", "Submits a challenge Instance", async (taskArgs: any, hre: Hardha
 })
 .addParam("address", "The address of the challenge instance")
 
+task("deploy", "Deploy a challenge instance locally", async (taskArgs: any, hre: HardhatRuntimeEnvironment) => {
+  const Contract = await hre.ethers.getContractFactory(taskArgs.name);
+  const deployment = await Contract.deploy();
+  await deployment.deployed();
+  console.log("Contract deployed to:", deployment.address);
+}).addParam("name", "Contract Name")
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
