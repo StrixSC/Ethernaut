@@ -24,7 +24,7 @@ describe("Elevator", function () {
 
         const gasPrice = await signer.provider?.getGasPrice();
         const solveTx = await solver.solve({
-            gasLimit: 125000,
+            gasLimit: 75000,
             gasPrice
         });
         const receipt = await solveTx.wait();
