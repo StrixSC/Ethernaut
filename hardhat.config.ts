@@ -61,6 +61,14 @@ task("deploy", "Deploy a challenge instance locally", async (taskArgs: any, hre:
   console.log("Contract deployed to:", deployment.address);
 }).addParam("name", "Contract Name")
 
+task("storage", "Get a challenge's storage", async (taskArgs: any, hre: HardhatRuntimeEnvironment) => {
+  for(let i = 0; true; i++) {
+    const storage = await hre.ethers.provider.getStorageAt(taskArgs.address, i);
+    console.log(storage);
+  };
+}).addParam("address", "Contract's address")
+
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
