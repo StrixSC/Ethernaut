@@ -11,7 +11,7 @@ contract PreservationSolver {
         owner = msg.sender;
     }
 
-    function convertAddress() view public returns (uint256) {
+    function addressToUint256() view public returns (uint256) {
         return uint256(uint160(address(this)));
     }
 }
